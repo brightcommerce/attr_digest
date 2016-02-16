@@ -27,16 +27,16 @@ And run `bundle install`.
 ## Dependencies
 
 Runtime:
-- activerecord
-- activesupport
+- activerecord (~> 4.2.5.1)
+- activesupport (~> 4.2.5.1)
 - argon2 (~> 0.1.4)
 
 Development/Test:
-- rake
-- rspec
-- sqlite3
-- simplecov
-- factory_girl
+- rake (~> 10.5)
+- rspec (~> 3.4)
+- sqlite3 (>= 1.3)
+- simplecov (~> 0.11.2)
+- factory_girl (~> 4.5.0)
 
 ## Compatibility
 
