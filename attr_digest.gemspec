@@ -23,7 +23,7 @@ Gem::Specification.new do |spec|
 
   spec.add_development_dependency("rake", "~> 10.5")
   spec.add_development_dependency("rspec", "~> 3.4")
-  spec.add_development_dependency("sqlite3", ">= 1.3")
-  spec.add_development_dependency("factory_girl", "~> 4.5.0")
+  spec.add_development_dependency("sqlite3", "~> 1.3")
+  spec.add_development_dependency("factory_girl", "~> 4.5")
   spec.add_development_dependency("simplecov", "~> 0.11.2")
 end

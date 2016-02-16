@@ -34,9 +34,9 @@ Runtime:
 Development/Test:
 - rake (~> 10.5)
 - rspec (~> 3.4)
-- sqlite3 (>= 1.3)
+- sqlite3 (~> 1.3)
 - simplecov (~> 0.11.2)
-- factory_girl (~> 4.5.0)
+- factory_girl (~> 4.5)
 
 ## Compatibility
 
