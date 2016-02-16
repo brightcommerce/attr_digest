@@ -120,7 +120,7 @@ bundle exec rake
 
 ## Roadmap
 
-I like to add the ability to pass a `secret` to the Argon2 hasher. This functionality exists in the Ruby Argon2 Gem.
+I would like to add the ability to pass a `secret` to the Argon2 hasher. This functionality exists in the Ruby Argon2 Gem.
 
 ## Contributing
 
@@ -132,7 +132,7 @@ I like to add the ability to pass a `secret` to the Argon2 hasher. This function
 
 ## Credit
 
-I like to thank [Panayotis Matsinopoulos](http://www.matsinopoulos.gr) for his [has_secure_attribute](https://github.com/pmatsinopoulos/has_secure_attribute) gem which provided a lot of the inspiration and framework for **AttrDigest**.
+I would like to thank [Panayotis Matsinopoulos](http://www.matsinopoulos.gr) for his [has_secure_attribute](https://github.com/pmatsinopoulos/has_secure_attribute) gem which provided a lot of the inspiration and framework for **AttrDigest**.
 
 ## License
 
