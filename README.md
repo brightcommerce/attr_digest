@@ -8,7 +8,7 @@
 
 [**AttrDigest**](https://github.com/brightcommerce/attr_digest) provides functionality to store a hash digest of an attribute using [Argon2](https://github.com/P-H-C/phc-winner-argon2).
 
-Argon2 is the official winner and recommendation of the [Password Hashing Competition (PHC)](https://password-hashing.net) which ran between 2013 and 2015, and is a password-hashing function that summarizes the state of the art in the design of memory-hard functions and can be used to hash passwords for credential storage, key derivation, or other applications.
+Argon2 is a password-hashing function that summarizes the state of the art in the design of memory-hard functions and can be used to hash passwords for credential storage, key derivation, or other applications. It  is the official winner and recommendation of the [Password Hashing Competition (PHC)](https://password-hashing.net) which ran between 2013 and 2015.
 
 This Gem uses the [Ruby Argon2 Gem](https://github.com/technion/ruby-argon2) which provides FFI bindings, and a simplified interface, to the Argon2 algorithm.
 
