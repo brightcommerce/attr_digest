@@ -9,7 +9,7 @@ module AttrDigest
     attr_accessor :time_cost
     attr_accessor :memory_cost
   end
-  
+
   self.time_cost = 2
   self.memory_cost = 16
 
@@ -17,10 +17,10 @@ module AttrDigest
     def attr_digest(meth, *args, &block)
       attribute_sym = meth.to_sym
       attr_reader attribute_sym
-      
+
       options = { validations: true, protected: false, case_sensitive: true, confirmation: true }
       options.merge! args[0] unless args.blank?
-      
+
       if options[:validations]
         confirm attribute_sym if options[:confirmation]
         validates attribute_sym, presence: true, on: :create
@@ -42,7 +42,7 @@ module AttrDigest
         unless unencrypted_value.blank?
           instance_variable_set("@#{attribute_sym.to_s}".to_sym, unencrypted_value)
           password = Argon2::Password.new(t_cost: AttrDigest.time_cost, m_cost: AttrDigest.memory_cost)
-          send("#{attribute_sym.to_s}_digest=".to_sym, password.hash(options[:case_sensitive] ? unencrypted_value : unencrypted_value.downcase))
+          send("#{attribute_sym.to_s}_digest=".to_sym, password.create(options[:case_sensitive] ? unencrypted_value : unencrypted_value.downcase))
         end
       end
     end

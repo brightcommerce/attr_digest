@@ -12,14 +12,14 @@ Argon2 is a password-hashing function that summarizes the state of the art in th
 
 This Gem uses the [Ruby Argon2 Gem](https://github.com/technion/ruby-argon2) which provides FFI bindings, and a simplified interface, to the Argon2 algorithm.
 
-**AttrDigest** provides similar functionality to Rails `has_secure_password`, but permits any number attributes to be hashed in a model, and obviously you're not limited to just the `password` attribute. 
+**AttrDigest** provides similar functionality to Rails `has_secure_password`, but permits any number attributes to be hashed in a model, and obviously you're not limited to just the `password` attribute.
 
 ## Installation
 
 To install add the following line to your `Gemfile`:
 
 ``` ruby
-gem 'attr_digest', '~> 1.0'
+gem 'attr_digest', '~> 1.1.0'
 ```
 
 And run `bundle install`.
@@ -27,9 +27,9 @@ And run `bundle install`.
 ## Dependencies
 
 Runtime:
-- activerecord (~> 4.2.5.1)
-- activesupport (~> 4.2.5.1)
-- argon2 (~> 0.1.4)
+- activerecord (~> 4.2.2)
+- activesupport (~> 4.2.2)
+- argon2 (~> 1.1.0)
 
 Development/Test:
 - rake (~> 10.5)
@@ -40,7 +40,7 @@ Development/Test:
 
 ## Compatibility
 
-Tested with Ruby 2.2.3p173 (2015-08-18 revision 51636) [x86_64-darwin15] against ActiveRecord 4.2.5.1 on Mac OS X El Capitan 10.11.3 (15D21).
+Tested with Ruby 2.2.3p173 (2015-08-18 revision 51636) [x86_64-darwin15] against ActiveRecord 4.2.6 on Mac OS X El Capitan 10.11.4 (15E65).
 
 Argon2 requires Ruby 2.2 minimum and an OS platform that supports Ruby FFI Bindings, so unfortunately Windows is out.
 
