@@ -19,7 +19,7 @@ This Gem uses the [Ruby Argon2 Gem](https://github.com/technion/ruby-argon2) whi
 To install add the following line to your `Gemfile`:
 
 ``` ruby
-gem 'attr_digest', '~> 1.1.0'
+gem 'attr_digest', github: 'brightcommerce/attr_digest', branch: 'rails5'
 ```
 
 And run `bundle install`.
