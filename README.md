@@ -27,8 +27,8 @@ And run `bundle install`.
 ## Dependencies
 
 Runtime:
-- activerecord (5.0.0.beta4)
-- activesupport (5.0.0.beta4)
+- activerecord (5.0.0.rc1)
+- activesupport (5.0.0.rc1)
 - argon2 (~> 1.1.0)
 
 Development/Test:
