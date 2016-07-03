@@ -27,8 +27,8 @@ And run `bundle install`.
 ## Dependencies
 
 Runtime:
-- activerecord (>= 4.2.2, ~> 5.0.0)
-- activesupport (>= 4.2.2, ~> 5.0.0)
+- activerecord (>= 4.2.6, ~> 5.0.0)
+- activesupport (>= 4.2.6, ~> 5.0.0)
 - argon2 (~> 1.1.0)
 
 Development/Test:
