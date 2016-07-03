@@ -66,7 +66,6 @@ module AttrDigest
     protected :protect_setter
     protected :define_authenticate_method
   end
-
 end
 
 ActiveRecord::Base.send :include, AttrDigest

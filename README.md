@@ -19,7 +19,7 @@ This Gem uses the [Ruby Argon2 Gem](https://github.com/technion/ruby-argon2) whi
 To install add the following line to your `Gemfile`:
 
 ``` ruby
-gem 'attr_digest', '~> 1.1.0'
+gem 'attr_digest',
 ```
 
 And run `bundle install`.
@@ -27,8 +27,8 @@ And run `bundle install`.
 ## Dependencies
 
 Runtime:
-- activerecord (~> 4.2.2)
-- activesupport (~> 4.2.2)
+- activerecord (>= 4.2.6, ~> 5.0.0)
+- activesupport (>= 4.2.6, ~> 5.0.0)
 - argon2 (~> 1.1.0)
 
 Development/Test:
@@ -40,7 +40,7 @@ Development/Test:
 
 ## Compatibility
 
-Tested with Ruby 2.2.3p173 (2015-08-18 revision 51636) [x86_64-darwin15] against ActiveRecord 4.2.6 on Mac OS X El Capitan 10.11.4 (15E65).
+Tested with Ruby 2.3.1p112 (2016-04-26 revision 54768) [x86_64-darwin15] against ActiveRecord 5.0.0 on Mac OS X El Capitan 10.11.5 (15F34).
 
 Argon2 requires Ruby 2.2 minimum and an OS platform that supports Ruby FFI Bindings, so unfortunately Windows is out.
 
