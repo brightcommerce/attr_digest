@@ -1,6 +1,6 @@
 [![Gem Version](https://badge.fury.io/rb/attr_digest.svg)](https://badge.fury.io/rb/attr_digest)
 [![Build Status](https://travis-ci.org/brightcommerce/attr_digest.svg?branch=rails5)](https://travis-ci.org/brightcommerce/attr_digest)
-[![codecov.io](https://codecov.io/github/brightcommerce/attr_digest/coverage.svg?branch=rails5)](https://codecov.io/github/brightcommerce/attr_digest?branch=rails5)
+[![codecov.io](https://codecov.io/github/brightcommerce/attr_digest/coverage.svg?branch=rails5)](https://codecov.io/github/brightcommerce/attr_digest?branch=master)
 [![HitCount](https://hitt.herokuapp.com/brightcommerce/attr_digest.svg)](https://github.com/brightcommerce/attr_digest)
 [![contributions welcome](https://img.shields.io/badge/contributions-welcome-brightgreen.svg?style=flat)](https://github.com/dwyl/esta/issues)
 
@@ -19,7 +19,7 @@ This Gem uses the [Ruby Argon2 Gem](https://github.com/technion/ruby-argon2) whi
 To install add the following line to your `Gemfile`:
 
 ``` ruby
-gem 'attr_digest', github: 'brightcommerce/attr_digest', branch: 'rails5'
+gem 'attr_digest',
 ```
 
 And run `bundle install`.
@@ -27,8 +27,8 @@ And run `bundle install`.
 ## Dependencies
 
 Runtime:
-- activerecord (>= 5.0.0.rc1, <= 5.0.0.rc2)
-- activesupport (>= 5.0.0.rc1, <= 5.0.0.rc2)
+- activerecord (>= 4.2.2, ~> 5.0.0)
+- activesupport (>= 4.2.2, ~> 5.0.0)
 - argon2 (~> 1.1.0)
 
 Development/Test:
@@ -40,7 +40,7 @@ Development/Test:
 
 ## Compatibility
 
-Tested with Ruby 2.3.1p112 (2016-04-26 revision 54768) [x86_64-darwin15] against ActiveRecord 5.0.0.rc2 on Mac OS X El Capitan 10.11.5 (15F34).
+Tested with Ruby 2.3.1p112 (2016-04-26 revision 54768) [x86_64-darwin15] against ActiveRecord 5.0.0 on Mac OS X El Capitan 10.11.5 (15F34).
 
 Argon2 requires Ruby 2.2 minimum and an OS platform that supports Ruby FFI Bindings, so unfortunately Windows is out.
 

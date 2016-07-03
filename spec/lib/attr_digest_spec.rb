@@ -4,19 +4,19 @@ describe ModelWithAttrDigest do
   it 'responds to :security_answer' do
     respond_to(:security_answer)
   end
-  
+
   it 'responds to :security_answer=' do
     respond_to(:security_answer=)
   end
-  
+
   it 'responds to :security_answer_confirmation' do
     respond_to(:security_answer_confirmation)
   end
-  
+
   it 'responds to :security_answer_confirmation=' do
     respond_to(:security_answer_confirmation=)
   end
-  
+
   it 'responds to :authenticate_security_answer' do
     respond_to(:authenticate_security_answer)
   end
@@ -27,7 +27,7 @@ describe ModelWithAttrDigest do
     subject.valid?
     expect(subject.errors[:security_answer_confirmation]).to include("doesn't match Security answer")
   end
-    
+
   it 'does not confirm :security_answer if not given' do
     subject.security_answer = nil
     subject.security_answer_confirmation = 'there hello'
@@ -41,19 +41,19 @@ describe ModelWithAttrDigest do
     subject.valid?
     expect(subject.errors[:security_answer]).to include("can't be blank")
   end
-  
+
   it 'requires :security_answer_confirmation if :security_answer given' do
     subject.security_answer = 'hello there'
     subject.valid?
     expect(subject.errors[:security_answer_confirmation]).to include("can't be blank")
   end
-  
+
   it 'does not require :security_answer_confirmation if :security_answer is not given' do
     subject.security_answer = ''
     subject.valid?
     expect(subject.errors[:security_answer_confirmation]).to be_blank
   end
-  
+
   it 'requires :security_answer_digest on create' do
     subject = FactoryGirl.build(:model_with_attr_digest)
     expect(subject).to be_new_record
@@ -68,7 +68,7 @@ describe ModelWithAttrDigest do
       end
     end).to raise_error(RuntimeError)
   end
-  
+
   it 'does not require :security_answer_digest on update' do
     subject = FactoryGirl.build(:model_with_attr_digest)
     expect(subject).to be_new_record
@@ -79,14 +79,14 @@ describe ModelWithAttrDigest do
     subject.reload
     expect(subject.security_answer_digest).to be_blank
   end
-  
+
   it 'allows to call :security_answer_digest directly if :protect_setter_for_digest is not given as option' do
     lambda do
       subject.security_answer_digest = 'hello'
       expect(subject.security_answer_digest).to eq('hello')
     end
   end
-  
+
   describe "#security_answer=" do
     it 'sets the :security_answer and saves the digest' do
       model = FactoryGirl.create(:model_with_attr_digest, security_answer: 'old answer', security_answer_confirmation: 'old answer')
@@ -100,7 +100,7 @@ describe ModelWithAttrDigest do
       expect(model.security_answer_digest).to_not eq(old_security_answer_digest)
     end
   end
-  
+
   describe '#authenticate_security_answer' do
     it 'returns true if :security_answer given matches the one stored' do
       model = FactoryGirl.create(:model_with_attr_digest, security_answer: 'some answer', security_answer_confirmation: 'some answer')
@@ -119,19 +119,19 @@ describe ModelWithAttrDigestAndValidationsOption do
   it 'responds to :security_answer' do
     respond_to(:security_answer)
   end
-  
+
   it 'responds to :security_answer=' do
     respond_to(:security_answer=)
   end
-  
+
   it 'responds to :security_answer_confirmation' do
     respond_to(:security_answer_confirmation)
   end
-  
+
   it 'responds to :security_answer_confirmation=' do
     respond_to(:security_answer_confirmation=)
   end
-  
+
   it 'responds to :authenticate_security_answer' do
     respond_to(:authenticate_security_answer)
   end
@@ -195,11 +195,11 @@ describe ModelWithAttrDigestAndConfirmationOption do
   it 'does not respond to :security_answer_confirmation' do
     respond_to(:security_answer_confirmation) == false
   end
-  
+
   it 'does not respond to :security_answer_confirmation=' do
     respond_to(:security_answer_confirmation=) == false
   end
-  
+
   it 'allows to create and save without any confirmation on :security_answer' do
     model = FactoryGirl.create(:model_with_attr_digest_and_confirmation_option, security_answer: 'Answer')
     model.save!

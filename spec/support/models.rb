@@ -8,7 +8,7 @@ end
 
 class ModelWithAttrDigestAndCaseSensitiveOption < ActiveRecord::Base
   self.table_name = "model_with_attr_digests"
-  
+
   attr_digest :password
   attr_digest :security_answer, case_sensitive: false
 
@@ -18,7 +18,7 @@ end
 
 class ModelWithAttrDigestAndProtectedOption < ActiveRecord::Base
   self.table_name = "model_with_attr_digests"
-  
+
   attr_digest :password
   attr_digest :security_answer, protected: true
 
@@ -28,7 +28,7 @@ end
 
 class ModelWithAttrDigestAndValidationsOption < ActiveRecord::Base
   self.table_name = "model_with_attr_digests"
-  
+
   attr_digest :password
   attr_digest :security_answer, validations: false
 
@@ -38,7 +38,7 @@ end
 
 class ModelWithAttrDigestAndConfirmationOption < ActiveRecord::Base
   self.table_name = "model_with_attr_digests"
-  
+
   attr_digest :password
   attr_digest :security_answer, confirmation: false
 

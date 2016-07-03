@@ -1,5 +1,4 @@
 FactoryGirl.define do
-  
   factory :model_with_attr_digest do
     username 'username'
     password 'password'
@@ -42,5 +41,4 @@ FactoryGirl.define do
     security_question 'question'
     security_answer 'answer'
   end
-  
 end
