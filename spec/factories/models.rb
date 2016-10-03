@@ -3,15 +3,15 @@ FactoryGirl.define do
     username 'username'
   end
 
-  factory :model_with_time_and_memory_costs do
+  factory :model_with_time_and_memory_cost_options do
     username 'username'
   end
 
-  factory :model_with_invalid_memory_cost do
+  factory :model_with_invalid_memory_cost_option do
     username 'username'
   end
 
-  factory :model_with_invalid_time_cost do
+  factory :model_with_invalid_time_cost_option do
     username 'username'
   end
 

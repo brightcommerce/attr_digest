@@ -14,7 +14,7 @@ describe ModelWithUsername do
   end
 
   it 'raises NoDigestException when digest is non-existent' do
-    model = FactoryGirl.create(:model_with_username)
+    model = FactoryGirl.create(:model_with_username, username: 'Bam Bam')
     expect(lambda do
       model.authenticate_password('abc')
     end).to raise_error(AttrDigest::NoDigestException)
@@ -31,26 +31,26 @@ describe ModelWithUsername do
   end
 end
 
-describe ModelWithTimeAndMemoryCosts do
+describe ModelWithTimeAndMemoryCostOptions do
   it 'creates a digest with alternative time and memory costs' do
-    model = FactoryGirl.create(:model_with_time_and_memory_costs, username: 'Wilma', password: 'abc')
+    model = FactoryGirl.create(:model_with_time_and_memory_cost_options, username: 'Wilma', password: 'abc')
     expect(model.authenticate_password('abc')).to be(true)
     expect(model.password_digest).to match(/m=4096,t=3/)
   end
 end
 
-describe ModelWithInvalidMemoryCost do
+describe ModelWithInvalidMemoryCostOption do
   it 'raises InvalidMemoryCost' do
-    model = FactoryGirl.create(:model_with_invalid_memory_cost, username: 'Betty')
+    model = FactoryGirl.create(:model_with_invalid_memory_cost_option, username: 'Betty')
     expect(lambda do
       model.password = "abc"
     end).to raise_error(AttrDigest::InvalidMemoryCost)
   end
 end
 
-describe ModelWithInvalidTimeCost do
+describe ModelWithInvalidTimeCostOption do
   it 'raises InvalidTimeCost' do
-    model = FactoryGirl.create(:model_with_invalid_time_cost, username: 'Dino')
+    model = FactoryGirl.create(:model_with_invalid_time_cost_option, username: 'Dino')
     expect(lambda do
       model.password = "abc"
     end).to raise_error(AttrDigest::InvalidTimeCost)
