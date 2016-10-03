@@ -20,6 +20,7 @@ module AttrDigest
   class << self
     attr_accessor :time_cost
     attr_accessor :memory_cost
+    attr_accessor :secret
   end
 
   self.time_cost = 2 # 1..10
@@ -36,7 +37,8 @@ module AttrDigest
         case_sensitive: true,
         confirmation: true,
         time_cost: AttrDigest.time_cost,
-        memory_cost: AttrDigest.memory_cost
+        memory_cost: AttrDigest.memory_cost,
+        secret: AttrDigest.secret
       }
       options.merge! args[0] unless args.blank?
 
@@ -66,15 +68,19 @@ module AttrDigest
           raise InvalidTimeCost.new("Invalid time cost, min 1 and max 10")
         end
 
+        password = if options[:secret]
+          Argon2::Password.new(t_cost: options[:time_cost], m_cost: options[:memory_cost], secret: options[:secret])
+        else
+          Argon2::Password.new(t_cost: options[:time_cost], m_cost: options[:memory_cost])
+        end
+
         if options[:validations] == true
           unless unencrypted_value.blank?
             instance_variable_set("@#{attribute_sym.to_s}".to_sym, unencrypted_value)
-            password = Argon2::Password.new(t_cost: options[:time_cost], m_cost: options[:memory_cost])
             send("#{attribute_sym.to_s}_digest=".to_sym, password.create(options[:case_sensitive] ? unencrypted_value : unencrypted_value.downcase))
           end
         else
           instance_variable_set("@#{attribute_sym.to_s}".to_sym, "#{unencrypted_value}")
-          password = Argon2::Password.new(t_cost: options[:time_cost], m_cost: options[:memory_cost])
           send("#{attribute_sym.to_s}_digest=".to_sym, password.create(options[:case_sensitive] ? "#{unencrypted_value}" : "#{unencrypted_value}".downcase))
         end
       end
@@ -93,7 +99,11 @@ module AttrDigest
         if digest.blank?
           raise NoDigestException.new("Digest for #{attribute_sym} is nil, there is nothing to authenticate with.")
         end
-        Argon2::Password.verify_password((options[:case_sensitive] ? "#{value}" : "#{value}".downcase), digest)
+        if options[:secret]
+          Argon2::Password.verify_password((options[:case_sensitive] ? "#{value}" : "#{value}".downcase), digest, options[:secret])
+        else
+          Argon2::Password.verify_password((options[:case_sensitive] ? "#{value}" : "#{value}".downcase), digest)
+        end
       end
     end
 

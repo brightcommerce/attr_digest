@@ -57,6 +57,13 @@ describe ModelWithInvalidTimeCostOption do
   end
 end
 
+describe ModelWithAttrDigestSecretOption do
+  it 'permits setting the secret option' do
+    model = FactoryGirl.create(:model_with_attr_digest_secret_option)
+    expect(model.authenticate_password('password')).to be(true)
+  end
+end
+
 describe ModelWithAttrDigest do
   it 'responds to :security_answer' do
     respond_to(:security_answer)

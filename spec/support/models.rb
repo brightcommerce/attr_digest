@@ -28,6 +28,14 @@ class ModelWithInvalidTimeCostOption < ActiveRecord::Base
   validates :username, presence: true, uniqueness: { case_sensitive: false }
 end
 
+class ModelWithAttrDigestSecretOption < ActiveRecord::Base
+  self.table_name = "model_with_usernames"
+
+  attr_digest :password, secret: 'super_secret'
+
+  validates :username, presence: true, uniqueness: { case_sensitive: false }
+end
+
 class ModelWithAttrDigest < ActiveRecord::Base
   attr_digest :password
   attr_digest :security_answer

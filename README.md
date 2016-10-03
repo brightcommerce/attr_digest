@@ -110,14 +110,14 @@ The attribute's digest is *not* protected from direct setting by default.
 
 #### Time and Memory Costs
 
-AttrDigest sets a default time and memory cost and expects the following minimum and maximum values:
+**AttrDigest** sets a default time and memory cost and expects the following minimum and maximum values:
 
 Option | Minimum Value | Maximum Value | Default Value
 --- | --- | --- | ---
 :time_cost | 1 | 10 | 2
 :memory_cost | 1 | 31 | 16
 
-You can change the global defaults by setting the cost options directly on the AttrDigest class:
+You can change the global defaults by setting the cost options directly on the `AttrDigest` class:
 
 ```ruby
 AttrDigest.time_cost = 3
@@ -130,19 +130,31 @@ You can also change the time and memory cost for a specific attribute by passing
 attr_digest :security_answer, time_cost: 3, memory_cost: 12
 ```
 
+#### Secret Key
+
+Argon2 supports an optional secret key value. This should be stored securely on your server, such as alongside your database credentials. Hashes generated with a secret key will only validate when presented that secret.
+
+You can set the optional secret key globally by setting the `secret` attribute on the `AttrDigest` class:
+
+```ruby
+AttrDigest.secret =  Rails.application.secrets.secret_key_base
+```
+
+You can also set the optional secret key for a specific attribute by passing the `:secret` option to the `attr_digest` class method in your model:
+
+```ruby
+attr_digest :security_answer, secret: Rails.application.secrets.secret_key_base
+```
+
 ## Tests
 
-Tests are written using Rspec, FactoryGirl and Sqlite3. There are 40 examples with 100% code coverage.
+Tests are written using Rspec, FactoryGirl and Sqlite3. There are 41 examples with 100% code coverage.
 
 To run the tests, execute the default rake task:
 
 ``` bash
 bundle exec rake
 ```
-
-## Roadmap
-
-I would like to add the ability to pass a `secret` to the Argon2 hasher. This functionality exists in the Ruby Argon2 Gem.
 
 ## Contributing
 

@@ -15,6 +15,12 @@ FactoryGirl.define do
     username 'username'
   end
 
+  factory :model_with_attr_digest_secret_option do
+    username 'username'
+    password 'password'
+    password_confirmation 'password'
+  end
+
   factory :model_with_attr_digest do
     username 'username'
     password 'password'
