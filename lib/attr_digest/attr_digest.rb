@@ -45,10 +45,16 @@ module AttrDigest
 
     def define_setter(attribute_sym, options)
       define_method "#{attribute_sym.to_s}=" do |unencrypted_value|
-        unless unencrypted_value.blank?
-          instance_variable_set("@#{attribute_sym.to_s}".to_sym, unencrypted_value)
+        if options[:validations] == true
+          unless unencrypted_value.blank?
+            instance_variable_set("@#{attribute_sym.to_s}".to_sym, unencrypted_value)
+            password = Argon2::Password.new(t_cost: AttrDigest.time_cost, m_cost: AttrDigest.memory_cost)
+            send("#{attribute_sym.to_s}_digest=".to_sym, password.create(options[:case_sensitive] ? unencrypted_value : unencrypted_value.downcase))
+          end
+        else
+          instance_variable_set("@#{attribute_sym.to_s}".to_sym, "#{unencrypted_value}")
           password = Argon2::Password.new(t_cost: AttrDigest.time_cost, m_cost: AttrDigest.memory_cost)
-          send("#{attribute_sym.to_s}_digest=".to_sym, password.create(options[:case_sensitive] ? unencrypted_value : unencrypted_value.downcase))
+          send("#{attribute_sym.to_s}_digest=".to_sym, password.create(options[:case_sensitive] ? "#{unencrypted_value}" : "#{unencrypted_value}".downcase))
         end
       end
     end
@@ -63,8 +69,10 @@ module AttrDigest
     def define_authenticate_method(attribute_sym, options)
       define_method "authenticate_#{attribute_sym}" do |value|
         digest = send("#{attribute_sym}_digest")
-        raise NoDigestException.new("Digest for #{attribute_sym} is nil, there is nothing to authenticate with.") unless digest
-        Argon2::Password.verify_password((options[:case_sensitive] ? value : value.downcase), digest)
+        if digest.blank?
+          raise NoDigestException.new("Digest for #{attribute_sym} is nil, there is nothing to authenticate with.")
+        end
+        Argon2::Password.verify_password((options[:case_sensitive] ? "#{value}" : "#{value}".downcase), digest)
       end
     end
 

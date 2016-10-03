@@ -9,14 +9,6 @@ describe ModelWithUsername do
     respond_to(:password=)
   end
 
-  it 'responds to :password_confirmation' do
-    respond_to(:password_confirmation)
-  end
-
-  it 'responds to :password_confirmation=' do
-    respond_to(:password_confirmation=)
-  end
-
   it 'responds to :authenticate_password' do
     respond_to(:authenticate_password)
   end
@@ -24,8 +16,18 @@ describe ModelWithUsername do
   it 'raises NoDigestException when digest is non-existent' do
     model = FactoryGirl.create(:model_with_username)
     expect(lambda do
-      model.authenticate_password("abc")
+      model.authenticate_password('abc')
     end).to raise_error(AttrDigest::NoDigestException)
+  end
+
+  it 'returns true if authenticate_password is passed an empty string' do
+    model = FactoryGirl.create(:model_with_username, username: 'Fred', password: '')
+    expect(model.authenticate_password('')).to be(true)
+  end
+
+  it 'returns true if authenticate_password is passed a nil' do
+    model = FactoryGirl.create(:model_with_username, username: 'Barney', password: '')
+    expect(model.authenticate_password(nil)).to be(true)
   end
 end
 
@@ -141,7 +143,6 @@ describe ModelWithAttrDigest do
       expect(model.authenticate_security_answer('some other answer')).to be(false)
     end
   end
-
 end
 
 describe ModelWithAttrDigestAndValidationsOption do
