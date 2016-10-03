@@ -1,5 +1,34 @@
 require 'spec_helper'
 
+describe ModelWithUsername do
+  it 'responds to :password' do
+    respond_to(:password)
+  end
+
+  it 'responds to :password=' do
+    respond_to(:password=)
+  end
+
+  it 'responds to :password_confirmation' do
+    respond_to(:password_confirmation)
+  end
+
+  it 'responds to :password_confirmation=' do
+    respond_to(:password_confirmation=)
+  end
+
+  it 'responds to :authenticate_password' do
+    respond_to(:authenticate_password)
+  end
+
+  it 'raises NoDigestException when digest is non-existent' do
+    model = FactoryGirl.create(:model_with_username)
+    expect(lambda do
+      model.authenticate_password("abc")
+    end).to raise_error(AttrDigest::NoDigestException)
+  end
+end
+
 describe ModelWithAttrDigest do
   it 'responds to :security_answer' do
     respond_to(:security_answer)

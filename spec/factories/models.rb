@@ -1,4 +1,8 @@
 FactoryGirl.define do
+  factory :model_with_username do
+    username 'username'
+  end
+
   factory :model_with_attr_digest do
     username 'username'
     password 'password'

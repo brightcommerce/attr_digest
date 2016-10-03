@@ -110,7 +110,7 @@ The attribute's digest is *not* protected from direct setting by default.
 
 ## Tests
 
-Tests are written using Rspec, FactoryGirl and Sqlite3. There are 31 examples with 100% code coverage.
+Tests are written using Rspec, FactoryGirl and Sqlite3. There are 37 examples with 100% code coverage.
 
 To run the tests, execute the default rake task:
 

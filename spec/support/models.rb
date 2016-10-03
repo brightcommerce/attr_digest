@@ -1,3 +1,9 @@
+class ModelWithUsername < ActiveRecord::Base
+  attr_digest :password, validations: false
+
+  validates :username, presence: true, uniqueness: { case_sensitive: false }
+end
+
 class ModelWithAttrDigest < ActiveRecord::Base
   attr_digest :password
   attr_digest :security_answer

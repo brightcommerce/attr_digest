@@ -5,6 +5,12 @@ require 'active_support/all'
 module AttrDigest
   extend ActiveSupport::Concern
 
+  class Error < ::StandardError
+  end
+
+  class NoDigestException < Error
+  end
+
   class << self
     attr_accessor :time_cost
     attr_accessor :memory_cost
@@ -56,7 +62,9 @@ module AttrDigest
 
     def define_authenticate_method(attribute_sym, options)
       define_method "authenticate_#{attribute_sym}" do |value|
-        Argon2::Password.verify_password((options[:case_sensitive] ? value : value.downcase), send("#{attribute_sym}_digest"))
+        digest = send("#{attribute_sym}_digest")
+        raise NoDigestException.new("Digest for #{attribute_sym} is nil, there is nothing to authenticate with.") unless digest
+        Argon2::Password.verify_password((options[:case_sensitive] ? value : value.downcase), digest)
       end
     end
 
