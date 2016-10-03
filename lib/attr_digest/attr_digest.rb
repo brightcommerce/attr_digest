@@ -11,20 +11,33 @@ module AttrDigest
   class NoDigestException < Error
   end
 
+  class InvalidMemoryCost < Error
+  end
+
+  class InvalidTimeCost < Error
+  end
+
   class << self
     attr_accessor :time_cost
     attr_accessor :memory_cost
   end
 
-  self.time_cost = 2
-  self.memory_cost = 16
+  self.time_cost = 2 # 1..10
+  self.memory_cost = 16 # 1..31
 
   module ClassMethods
     def attr_digest(meth, *args, &block)
       attribute_sym = meth.to_sym
       attr_reader attribute_sym
 
-      options = { validations: true, protected: false, case_sensitive: true, confirmation: true }
+      options = {
+        validations: true,
+        protected: false,
+        case_sensitive: true,
+        confirmation: true,
+        time_cost: AttrDigest.time_cost,
+        memory_cost: AttrDigest.memory_cost
+      }
       options.merge! args[0] unless args.blank?
 
       if options[:validations]
@@ -45,15 +58,23 @@ module AttrDigest
 
     def define_setter(attribute_sym, options)
       define_method "#{attribute_sym.to_s}=" do |unencrypted_value|
+        if options[:memory_cost] < 1 || options[:memory_cost] > 31
+          raise InvalidMemoryCost.new("Invalid memory cost, min 1 and max 31")
+        end
+
+        if options[:time_cost] < 1 || options[:time_cost] > 31
+          raise InvalidTimeCost.new("Invalid time cost, min 1 and max 10")
+        end
+
         if options[:validations] == true
           unless unencrypted_value.blank?
             instance_variable_set("@#{attribute_sym.to_s}".to_sym, unencrypted_value)
-            password = Argon2::Password.new(t_cost: AttrDigest.time_cost, m_cost: AttrDigest.memory_cost)
+            password = Argon2::Password.new(t_cost: options[:time_cost], m_cost: options[:memory_cost])
             send("#{attribute_sym.to_s}_digest=".to_sym, password.create(options[:case_sensitive] ? unencrypted_value : unencrypted_value.downcase))
           end
         else
           instance_variable_set("@#{attribute_sym.to_s}".to_sym, "#{unencrypted_value}")
-          password = Argon2::Password.new(t_cost: AttrDigest.time_cost, m_cost: AttrDigest.memory_cost)
+          password = Argon2::Password.new(t_cost: options[:time_cost], m_cost: options[:memory_cost])
           send("#{attribute_sym.to_s}_digest=".to_sym, password.create(options[:case_sensitive] ? "#{unencrypted_value}" : "#{unencrypted_value}".downcase))
         end
       end

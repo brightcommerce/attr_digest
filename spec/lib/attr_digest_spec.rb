@@ -31,6 +31,32 @@ describe ModelWithUsername do
   end
 end
 
+describe ModelWithTimeAndMemoryCosts do
+  it 'creates a digest with alternative time and memory costs' do
+    model = FactoryGirl.create(:model_with_time_and_memory_costs, username: 'Wilma', password: 'abc')
+    expect(model.authenticate_password('abc')).to be(true)
+    expect(model.password_digest).to match(/m=4096,t=3/)
+  end
+end
+
+describe ModelWithInvalidMemoryCost do
+  it 'raises InvalidMemoryCost' do
+    model = FactoryGirl.create(:model_with_invalid_memory_cost, username: 'Betty')
+    expect(lambda do
+      model.password = "abc"
+    end).to raise_error(AttrDigest::InvalidMemoryCost)
+  end
+end
+
+describe ModelWithInvalidTimeCost do
+  it 'raises InvalidTimeCost' do
+    model = FactoryGirl.create(:model_with_invalid_time_cost, username: 'Dino')
+    expect(lambda do
+      model.password = "abc"
+    end).to raise_error(AttrDigest::InvalidTimeCost)
+  end
+end
+
 describe ModelWithAttrDigest do
   it 'responds to :security_answer' do
     respond_to(:security_answer)

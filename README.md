@@ -108,9 +108,31 @@ attr_digest :security_answer, protected: true
 
 The attribute's digest is *not* protected from direct setting by default.
 
+#### Time and Memory Costs
+
+AttrDigest sets a default time and memory cost and expects the following minimum and maximum values:
+
+Option | Minimum Value | Maximum Value | Default Value
+--- | --- | --- | ---
+:time_cost | 1 | 10 | 2
+:memory_cost | 1 | 31 | 16
+
+You can change the global defaults by setting the cost options directly on the AttrDigest class:
+
+```ruby
+AttrDigest.time_cost = 3
+AttrDigest.memory_cost = 12
+```
+
+You can also change the time and memory cost for a specific attribute by passing the options to the `attr_digest` class method in your model:
+
+```ruby
+attr_digest :security_answer, time_cost: 3, memory_cost: 12
+```
+
 ## Tests
 
-Tests are written using Rspec, FactoryGirl and Sqlite3. There are 37 examples with 100% code coverage.
+Tests are written using Rspec, FactoryGirl and Sqlite3. There are 40 examples with 100% code coverage.
 
 To run the tests, execute the default rake task:
 

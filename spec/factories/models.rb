@@ -3,6 +3,18 @@ FactoryGirl.define do
     username 'username'
   end
 
+  factory :model_with_time_and_memory_costs do
+    username 'username'
+  end
+
+  factory :model_with_invalid_memory_cost do
+    username 'username'
+  end
+
+  factory :model_with_invalid_time_cost do
+    username 'username'
+  end
+
   factory :model_with_attr_digest do
     username 'username'
     password 'password'
