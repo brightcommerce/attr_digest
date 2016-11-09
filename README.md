@@ -108,6 +108,8 @@ attr_digest :password, format: { with: /\A[a-zA-Z]+\z/, message: "only allows le
 
 AttrDigest adds the Rails format validator and passes the options hash through as is. See [Active Record Validations format validator](http://edgeguides.rubyonrails.org/active_record_validations.html#format) for options you can pass to the `format` options hash.
 
+**NOTE:** The `format` option is not affected by the `validations` option. Adding the `format` option will add a Rails format validator *regardless* of whether the `validations` option is set to `true` or `false`.
+
 #### Protected Digest Setter
 
 If you want to prevent the attribute's digest being set directly, you can include the `protected` option:
