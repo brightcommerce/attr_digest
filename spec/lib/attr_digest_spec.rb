@@ -31,6 +31,21 @@ describe ModelWithUsername do
   end
 end
 
+describe ModelWithFormatOption do
+  it 'fails validation if password does not meet format conditions' do
+    model = FactoryGirl.create(:model_with_format_option)
+    model.password = "p455w0rd"
+    expect(model.valid?).to be(false)
+    expect(model.errors[:password]).to include("only allows letters")
+  end
+
+  it 'passes validation if password meets format conditions' do
+    model = FactoryGirl.create(:model_with_format_option, username: 'Rocky Snr')
+    model.password = "password"
+    expect(model.valid?).to be(true)
+  end
+end
+
 describe ModelWithTimeAndMemoryCostOptions do
   it 'creates a digest with alternative time and memory costs' do
     model = FactoryGirl.create(:model_with_time_and_memory_cost_options, username: 'Wilma', password: 'abc')

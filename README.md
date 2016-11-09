@@ -98,6 +98,16 @@ If you prefer to skip confirmations for the attribute you are hashing, you can p
 attr_digest :security_answer, confirmation: false
 ```
 
+#### Format
+
+You can ensure the attribute you are hashing matches a given regular expression by passing a `format` option:
+
+```ruby
+attr_digest :password, format: { with: /\A[a-zA-Z]+\z/, message: "only allows letters" }
+```
+
+AttrDigest adds the Rails format validator and passes the options hash through as is. See [Active Record Validations format validator](http://edgeguides.rubyonrails.org/active_record_validations.html#format) for options you can pass to the `format` options hash.
+
 #### Protected Digest Setter
 
 If you want to prevent the attribute's digest being set directly, you can include the `protected` option:
@@ -148,7 +158,7 @@ attr_digest :security_answer, secret: Rails.application.secrets.secret_key_base
 
 ## Tests
 
-Tests are written using Rspec, FactoryGirl and Sqlite3. There are 41 examples with 100% code coverage.
+Tests are written using Rspec, FactoryGirl and Sqlite3. There are 43 examples with 100% code coverage.
 
 To run the tests, execute the default rake task:
 

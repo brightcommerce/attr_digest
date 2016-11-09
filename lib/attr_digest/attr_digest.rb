@@ -48,6 +48,10 @@ module AttrDigest
         before_create { raise "#{attribute_sym}_digest missing on new record" if send("#{attribute_sym}_digest").blank? }
       end
 
+      if options[:format]
+        add_format_validation(attribute_sym, options)
+      end
+
       define_setter(attribute_sym, options)
       protect_setter(attribute_sym) if options[:protected]
       define_authenticate_method(attribute_sym, options)
@@ -56,6 +60,10 @@ module AttrDigest
     def add_confirmation_validation(attribute_sym)
       validates attribute_sym, confirmation: true, if: lambda { |m| m.send(attribute_sym).present? }
       validates "#{attribute_sym}_confirmation".to_sym, presence: true, if: lambda { |m| m.send(attribute_sym).present? }
+    end
+
+    def add_format_validation(attribute_sym, options)
+      validates attribute_sym, format: options[:format], if: lambda { |m| m.send(attribute_sym).present? }
     end
 
     def define_setter(attribute_sym, options)
@@ -109,6 +117,7 @@ module AttrDigest
 
     protected :attr_digest
     protected :add_confirmation_validation
+    protected :add_format_validation
     protected :define_setter
     protected :protect_setter
     protected :define_authenticate_method

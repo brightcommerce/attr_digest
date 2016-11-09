@@ -3,6 +3,10 @@ FactoryGirl.define do
     username 'username'
   end
 
+  factory :model_with_format_option do
+    username 'Rocky'
+  end
+
   factory :model_with_time_and_memory_cost_options do
     username 'username'
   end

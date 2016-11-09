@@ -4,6 +4,14 @@ class ModelWithUsername < ActiveRecord::Base
   validates :username, presence: true, uniqueness: { case_sensitive: false }
 end
 
+class ModelWithFormatOption < ActiveRecord::Base
+  self.table_name = "model_with_usernames"
+
+  attr_digest :password, validations: false, confirmation: false, format: { with: /\A[a-zA-Z]+\z/, message: "only allows letters" }
+
+  validates :username, presence: true, uniqueness: { case_sensitive: false }
+end
+
 class ModelWithTimeAndMemoryCostOptions < ActiveRecord::Base
   self.table_name = "model_with_usernames"
 
