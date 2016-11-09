@@ -43,7 +43,7 @@ module AttrDigest
       options.merge! args[0] unless args.blank?
 
       if options[:validations]
-        confirm attribute_sym if options[:confirmation]
+        add_confirmation_validation(attribute_sym) if options[:confirmation]
         validates attribute_sym, presence: true, on: :create
         before_create { raise "#{attribute_sym}_digest missing on new record" if send("#{attribute_sym}_digest").blank? }
       end
@@ -53,7 +53,7 @@ module AttrDigest
       define_authenticate_method(attribute_sym, options)
     end
 
-    def confirm(attribute_sym)
+    def add_confirmation_validation(attribute_sym)
       validates attribute_sym, confirmation: true, if: lambda { |m| m.send(attribute_sym).present? }
       validates "#{attribute_sym}_confirmation".to_sym, presence: true, if: lambda { |m| m.send(attribute_sym).present? }
     end
@@ -108,7 +108,7 @@ module AttrDigest
     end
 
     protected :attr_digest
-    protected :confirm
+    protected :add_confirmation_validation
     protected :define_setter
     protected :protect_setter
     protected :define_authenticate_method
