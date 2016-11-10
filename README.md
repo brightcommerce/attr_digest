@@ -125,7 +125,7 @@ AttrDigest adds the Rails length validator and passes the options hash through a
 
 **NOTE:** The `length` option is not affected by the `validations` option. Adding the `length` option will add a Rails length validator *regardless* of whether the `validations` option is set to `true` or `false`.
 
-#### Protected Digest Setter
+### Protected Digest Setter
 
 If you want to prevent the attribute's digest being set directly, you can include the `protected` option:
 
@@ -135,7 +135,7 @@ attr_digest :security_answer, protected: true
 
 The attribute's digest is *not* protected from direct setting by default.
 
-#### Time and Memory Costs
+### Time and Memory Costs
 
 **AttrDigest** sets a default time and memory cost and expects the following minimum and maximum values:
 
@@ -157,7 +157,7 @@ You can also change the time and memory cost for a specific attribute by passing
 attr_digest :security_answer, time_cost: 3, memory_cost: 12
 ```
 
-#### Secret Key
+### Secret Key
 
 Argon2 supports an optional secret key value. This should be stored securely on your server, such as alongside your database credentials. Hashes generated with a secret key will only validate when presented that secret.
 
