@@ -12,6 +12,38 @@ class ModelWithFormatOption < ActiveRecord::Base
   validates :username, presence: true, uniqueness: { case_sensitive: false }
 end
 
+class ModelWithMinimumLengthOption < ActiveRecord::Base
+  self.table_name = "model_with_usernames"
+
+  attr_digest :password, validations: false, confirmation: false, length: { minimum: 5 }
+
+  validates :username, presence: true, uniqueness: { case_sensitive: false }
+end
+
+class ModelWithMaximumLengthOption < ActiveRecord::Base
+  self.table_name = "model_with_usernames"
+
+  attr_digest :password, validations: false, confirmation: false, length: { maximum: 10 }
+
+  validates :username, presence: true, uniqueness: { case_sensitive: false }
+end
+
+class ModelWithLengthRangeOption < ActiveRecord::Base
+  self.table_name = "model_with_usernames"
+
+  attr_digest :password, validations: false, confirmation: false, length: { in: 5..10 }
+
+  validates :username, presence: true, uniqueness: { case_sensitive: false }
+end
+
+class ModelWithExactLengthOption < ActiveRecord::Base
+  self.table_name = "model_with_usernames"
+
+  attr_digest :password, validations: false, confirmation: false, length: { is: 8 }
+
+  validates :username, presence: true, uniqueness: { case_sensitive: false }
+end
+
 class ModelWithTimeAndMemoryCostOptions < ActiveRecord::Base
   self.table_name = "model_with_usernames"
 

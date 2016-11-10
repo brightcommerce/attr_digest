@@ -46,6 +46,73 @@ describe ModelWithFormatOption do
   end
 end
 
+describe ModelWithMinimumLengthOption do
+  it 'fails validation if password does not meet minimum length condition' do
+    model = FactoryGirl.create(:model_with_minimum_length_option)
+    model.password = "pass"
+    expect(model.valid?).to be(false)
+    expect(model.errors[:password]).to include("is too short (minimum is 5 characters)")
+  end
+
+  it 'passes validation if password meets minimum length condition' do
+    model = FactoryGirl.create(:model_with_minimum_length_option, username: 'Pebbles Jnr')
+    model.password = "password"
+    expect(model.valid?).to be(true)
+  end
+end
+
+describe ModelWithMaximumLengthOption do
+  it 'fails validation if password does not meet maximum length condition' do
+    model = FactoryGirl.create(:model_with_maximum_length_option)
+    model.password = "extra-long-password"
+    expect(model.valid?).to be(false)
+    expect(model.errors[:password]).to include("is too long (maximum is 10 characters)")
+  end
+
+  it 'passes validation if password meets maximum length condition' do
+    model = FactoryGirl.create(:model_with_maximum_length_option, username: 'The late Mr Slate')
+    model.password = "password"
+    expect(model.valid?).to be(true)
+  end
+end
+
+describe ModelWithLengthRangeOption do
+  it 'fails validation if password does not meet ranged length condition (too long)' do
+    model = FactoryGirl.create(:model_with_length_range_option)
+    model.password = "extra-long-password"
+    expect(model.valid?).to be(false)
+    expect(model.errors[:password]).to include("is too long (maximum is 10 characters)")
+  end
+
+  it 'fails validation if password does not meet ranged length condition (too short)' do
+    model = FactoryGirl.create(:model_with_length_range_option, username: 'Arnold Jnr')
+    model.password = "pass"
+    expect(model.valid?).to be(false)
+    expect(model.errors[:password]).to include("is too short (minimum is 5 characters)")
+  end
+
+  it 'passes validation if password meets ranged length condition' do
+    model = FactoryGirl.create(:model_with_length_range_option, username: 'Arnold Snr')
+    model.password = "password"
+    expect(model.valid?).to be(true)
+  end
+end
+
+describe ModelWithExactLengthOption do
+  it 'fails validation if password does not meet exact length condition' do
+    model = FactoryGirl.create(:model_with_exact_length_option)
+    model.password = "short"
+    expect(model.valid?).to be(false)
+    expect(model.errors[:password]).to include("is the wrong length (should be 8 characters)")
+  end
+
+  it 'passes validation if password meets exact length condition' do
+    model = FactoryGirl.create(:model_with_exact_length_option, username: 'The late Grand Poobah')
+    model.password = "password"
+    expect(model.valid?).to be(true)
+  end
+end
+
 describe ModelWithTimeAndMemoryCostOptions do
   it 'creates a digest with alternative time and memory costs' do
     model = FactoryGirl.create(:model_with_time_and_memory_cost_options, username: 'Wilma', password: 'abc')

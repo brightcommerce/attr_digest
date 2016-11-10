@@ -110,6 +110,21 @@ AttrDigest adds the Rails format validator and passes the options hash through a
 
 **NOTE:** The `format` option is not affected by the `validations` option. Adding the `format` option will add a Rails format validator *regardless* of whether the `validations` option is set to `true` or `false`.
 
+#### Length
+
+You can ensure the attribute your are hashing meets certain length criteria by passing a `length` option:
+
+```ruby
+attr_digest :password, length: { minimum: 5 }
+attr_digest :password, length: { maximum: 10 }
+attr_digest :password, length: { in: 5..10 }
+attr_digest :password, length: { is: 8 }
+```
+
+AttrDigest adds the Rails length validator and passes the options hash through as is. See [Active Record Validations length validator](http://edgeguides.rubyonrails.org/active_record_validations.html#length) for options you can pass to the `length` options hash.
+
+**NOTE:** The `length` option is not affected by the `validations` option. Adding the `length` option will add a Rails length validator *regardless* of whether the `validations` option is set to `true` or `false`.
+
 #### Protected Digest Setter
 
 If you want to prevent the attribute's digest being set directly, you can include the `protected` option:
@@ -160,7 +175,7 @@ attr_digest :security_answer, secret: Rails.application.secrets.secret_key_base
 
 ## Tests
 
-Tests are written using Rspec, FactoryGirl and Sqlite3. There are 43 examples with 100% code coverage.
+Tests are written using Rspec, FactoryGirl and Sqlite3. There are 52 examples with 100% code coverage.
 
 To run the tests, execute the default rake task:
 

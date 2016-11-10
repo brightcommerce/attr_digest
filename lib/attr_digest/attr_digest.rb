@@ -52,6 +52,10 @@ module AttrDigest
         add_format_validation(attribute_sym, options)
       end
 
+      if options[:length]
+        add_length_validation(attribute_sym, options)
+      end
+
       define_setter(attribute_sym, options)
       protect_setter(attribute_sym) if options[:protected]
       define_authenticate_method(attribute_sym, options)
@@ -64,6 +68,10 @@ module AttrDigest
 
     def add_format_validation(attribute_sym, options)
       validates attribute_sym, format: options[:format], if: lambda { |m| m.send(attribute_sym).present? }
+    end
+
+    def add_length_validation(attribute_sym, options)
+      validates attribute_sym, length: options[:length], if: lambda { |m| m.send(attribute_sym).present? }
     end
 
     def define_setter(attribute_sym, options)
@@ -118,6 +126,7 @@ module AttrDigest
     protected :attr_digest
     protected :add_confirmation_validation
     protected :add_format_validation
+    protected :add_length_validation
     protected :define_setter
     protected :protect_setter
     protected :define_authenticate_method
