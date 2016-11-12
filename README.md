@@ -29,7 +29,7 @@ And run `bundle install`.
 Runtime:
 - activerecord (>= 4.2.6, ~> 5.0.0)
 - activesupport (>= 4.2.6, ~> 5.0.0)
-- argon2 (~> 1.1.0)
+- argon2 (~> 1.1.1)
 
 Development/Test:
 - rake (~> 10.5)
