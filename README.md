@@ -2,7 +2,7 @@
 [![Build Status](https://travis-ci.org/brightcommerce/attr_digest.svg?branch=master)](https://travis-ci.org/brightcommerce/attr_digest)
 [![codecov.io](https://codecov.io/github/brightcommerce/attr_digest/coverage.svg?branch=master)](https://codecov.io/github/brightcommerce/attr_digest?branch=master)
 [![HitCount](https://hitt.herokuapp.com/brightcommerce/attr_digest.svg)](https://github.com/brightcommerce/attr_digest)
-[![contributions welcome](https://img.shields.io/badge/contributions-welcome-brightgreen.svg?style=flat)](https://github.com/dwyl/esta/issues)
+[![contributions welcome](https://img.shields.io/badge/contributions-welcome-brightgreen.svg?style=flat)](https://github.com/brightcommerce/attr_digest/pulls)
 
 # AttrDigest
 
@@ -40,10 +40,9 @@ Development/Test:
 
 ## Compatibility
 
-Tested with Ruby 2.3.1p112 (2016-04-26 revision 54768) [x86_64-darwin15] against ActiveRecord 5.0.0 on Mac OS X El Capitan 10.11.5 (15F34).
+Tested with Ruby 2.3.1p112 (2016-04-26 revision 54768) [x86_64-darwin15] against ActiveRecord 5.0.0 on macOS Sierra 10.12.1 (16B2555).
 
 Argon2 requires Ruby 2.2 minimum and an OS platform that supports Ruby FFI Bindings, so unfortunately Windows is out.
-
 
 ## Usage
 
@@ -98,7 +97,34 @@ If you prefer to skip confirmations for the attribute you are hashing, you can p
 attr_digest :security_answer, confirmation: false
 ```
 
-#### Protected Digest Setter
+#### Format
+
+You can ensure the attribute you are hashing matches a given regular expression by passing a `format` option:
+
+```ruby
+attr_digest :password, format: { with: /\A[a-zA-Z]+\z/, message: "only allows letters" }
+```
+
+AttrDigest adds the Rails format validator and passes the options hash through as is. See [Active Record Validations format validator](http://edgeguides.rubyonrails.org/active_record_validations.html#format) for options you can pass to the `format` options hash.
+
+**NOTE:** The `format` option is not affected by the `validations` option. Adding the `format` option will add a Rails format validator *regardless* of whether the `validations` option is set to `true` or `false`.
+
+#### Length
+
+You can ensure the attribute your are hashing meets certain length criteria by passing a `length` option:
+
+```ruby
+attr_digest :password, length: { minimum: 5 }
+attr_digest :password, length: { maximum: 10 }
+attr_digest :password, length: { in: 5..10 }
+attr_digest :password, length: { is: 8 }
+```
+
+AttrDigest adds the Rails length validator and passes the options hash through as is. See [Active Record Validations length validator](http://edgeguides.rubyonrails.org/active_record_validations.html#length) for options you can pass to the `length` options hash.
+
+**NOTE:** The `length` option is not affected by the `validations` option. Adding the `length` option will add a Rails length validator *regardless* of whether the `validations` option is set to `true` or `false`.
+
+### Protected Digest Setter
 
 If you want to prevent the attribute's digest being set directly, you can include the `protected` option:
 
@@ -108,19 +134,53 @@ attr_digest :security_answer, protected: true
 
 The attribute's digest is *not* protected from direct setting by default.
 
+### Time and Memory Costs
+
+**AttrDigest** sets a default time and memory cost and expects the following minimum and maximum values:
+
+Option | Minimum Value | Maximum Value | Default Value
+--- | --- | --- | ---
+:time_cost | 1 | 10 | 2
+:memory_cost | 1 | 31 | 16
+
+You can change the global defaults by setting the cost options directly on the `AttrDigest` class:
+
+```ruby
+AttrDigest.time_cost = 3
+AttrDigest.memory_cost = 12
+```
+
+You can also change the time and memory cost for a specific attribute by passing the options to the `attr_digest` class method in your model:
+
+```ruby
+attr_digest :security_answer, time_cost: 3, memory_cost: 12
+```
+
+### Secret Key
+
+Argon2 supports an optional secret key value. This should be stored securely on your server, such as alongside your database credentials. Hashes generated with a secret key will only validate when presented that secret.
+
+You can set the optional secret key globally by setting the `secret` attribute on the `AttrDigest` class:
+
+```ruby
+AttrDigest.secret =  Rails.application.secrets.secret_key_base
+```
+
+You can also set the optional secret key for a specific attribute by passing the `:secret` option to the `attr_digest` class method in your model:
+
+```ruby
+attr_digest :security_answer, secret: Rails.application.secrets.secret_key_base
+```
+
 ## Tests
 
-Tests are written using Rspec, FactoryGirl and Sqlite3. There are 31 examples with 100% code coverage.
+Tests are written using Rspec, FactoryGirl and Sqlite3. There are 52 examples with 100% code coverage.
 
 To run the tests, execute the default rake task:
 
 ``` bash
 bundle exec rake
 ```
-
-## Roadmap
-
-I would like to add the ability to pass a `secret` to the Argon2 hasher. This functionality exists in the Ruby Argon2 Gem.
 
 ## Contributing
 
@@ -133,6 +193,10 @@ I would like to add the ability to pass a `secret` to the Argon2 hasher. This fu
 ## Credit
 
 I would like to thank [Panayotis Matsinopoulos](http://www.matsinopoulos.gr) for his [has_secure_attribute](https://github.com/pmatsinopoulos/has_secure_attribute) gem which provided a lot of the inspiration and framework for **AttrDigest**.
+
+I would also like to thank [Lawrence Sproul](https://github.com/Lawrence-Sproul) for bringing to light some potential error conditions,  providing the motivation to make the gem feature complete and the inspiration for additional validation options.
+
+This gem was written and is maintained by [Jurgen Jocubeit](https://github.com/JurgenJocubeit), CEO and President Brightcommerce, Inc.
 
 ## License
 

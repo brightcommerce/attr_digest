@@ -1,5 +1,18 @@
 # Change Log
 
+##v2.0.0
+- Added Ruby 2.3.1 to Travis CI configuration file.
+- Updated README.
+- Added length validator option.
+- Added format validation option.
+- Refactored validation method name.
+- Updated Argon2 dependency to V1.1.1.
+- Added secret key option.
+- Renamed spec classes and factory names.
+- Added time_cost and memory_cost to attr_digest class method and AttrDigest constant.
+- Coerce values to string, permit blank digest with tests.
+- Added NoDigestException and tests.
+
 ##v1.2.0
 - Updated ActiveSupport and ActiveRecord between 4.2.6 and v5.0.0.
 
