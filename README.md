@@ -196,6 +196,8 @@ I would like to thank [Panayotis Matsinopoulos](http://www.matsinopoulos.gr) for
 
 I would also like to thank [Lawrence Sproul](https://github.com/Lawrence-Sproul) for bringing to light some potential error conditions,  providing the motivation to make the gem feature complete and provide inspiration for additional validation options.
 
+This gem was written and is maintained by [Jurgen Jocubeit](https://github.com/JurgenJocubeit), CEO and President Brightcommerce, Inc.
+
 ## License
 
 The gem is available as open source under the terms of the [MIT License](http://opensource.org/licenses/MIT).
