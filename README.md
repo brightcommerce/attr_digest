@@ -40,10 +40,9 @@ Development/Test:
 
 ## Compatibility
 
-Tested with Ruby 2.3.1p112 (2016-04-26 revision 54768) [x86_64-darwin15] against ActiveRecord 5.0.0 on Mac OS X El Capitan 10.11.5 (15F34).
+Tested with Ruby 2.3.1p112 (2016-04-26 revision 54768) [x86_64-darwin15] against ActiveRecord 5.0.0 on macOS Sierra 10.12.1 (16B2555).
 
 Argon2 requires Ruby 2.2 minimum and an OS platform that supports Ruby FFI Bindings, so unfortunately Windows is out.
-
 
 ## Usage
 
