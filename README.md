@@ -1,7 +1,6 @@
 [![Gem Version](https://badge.fury.io/rb/attr_digest.svg)](https://badge.fury.io/rb/attr_digest)
 [![Build Status](https://travis-ci.org/brightcommerce/attr_digest.svg?branch=master)](https://travis-ci.org/brightcommerce/attr_digest)
 [![codecov.io](https://codecov.io/github/brightcommerce/attr_digest/coverage.svg?branch=master)](https://codecov.io/github/brightcommerce/attr_digest?branch=master)
-[![HitCount](https://hitt.herokuapp.com/brightcommerce/attr_digest.svg)](https://github.com/brightcommerce/attr_digest)
 [![contributions welcome](https://img.shields.io/badge/contributions-welcome-brightgreen.svg?style=flat)](https://github.com/brightcommerce/attr_digest/pulls)
 
 # AttrDigest
