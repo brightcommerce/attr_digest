@@ -17,7 +17,7 @@ Gem::Specification.new do |spec|
   spec.require_paths         = ['lib']
   spec.files                 = Dir.glob('{lib, spec}/**/*') + %w(README.md CHANGELOG.md MIT-LICENSE)
 
-  spec.add_runtime_dependency('activesupport', '>= 4.2.6', '~> 5.0.0')
+  spec.add_runtime_dependency('activesupport', '>= 4.2.6', '<= 5.1.0')
   spec.add_runtime_dependency('activerecord', '>= 4.2.6', '~> 5.0.0')
   spec.add_runtime_dependency('argon2', '~> 1.1.1')
 
