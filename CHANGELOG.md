@@ -1,5 +1,9 @@
 # Change Log
 
+##v2.1.0
+- Removed upper limit for ActiveSupport and ActiveRecord dependencies.
+- Updated README.
+
 ##v2.0.0
 - Added Ruby 2.3.1 to Travis CI configuration file.
 - Updated README.
