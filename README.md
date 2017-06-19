@@ -26,8 +26,8 @@ And run `bundle install`.
 ## Dependencies
 
 Runtime:
-- activerecord (>= 4.2.6, ~> 5.0.0)
-- activesupport (>= 4.2.6, ~> 5.0.0)
+- activerecord (>= 4.2.6)
+- activesupport (>= 4.2.6)
 - argon2 (~> 1.1.1)
 
 Development/Test:
@@ -39,7 +39,7 @@ Development/Test:
 
 ## Compatibility
 
-Tested with Ruby 2.3.1p112 (2016-04-26 revision 54768) [x86_64-darwin15] against ActiveRecord 5.0.0 on macOS Sierra 10.12.1 (16B2555).
+Tested with Ruby 2.3.1p112 (2016-04-26 revision 54768) [x86_64-darwin15] against ActiveRecord 5.0.0 on macOS Sierra 10.12.5 (16F73).
 
 Argon2 requires Ruby 2.2 minimum and an OS platform that supports Ruby FFI Bindings, so unfortunately Windows is out.
 
@@ -203,4 +203,4 @@ The gem is available as open source under the terms of the [MIT License](http://
 
 ## Copyright
 
-Copyright 2016 Brightcommerce, Inc.
+Copyright 2016-2017 Brightcommerce, Inc.
