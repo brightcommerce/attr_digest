@@ -28,7 +28,7 @@ And run `bundle install`.
 Runtime:
 - activerecord (>= 4.2.6)
 - activesupport (>= 4.2.6)
-- argon2 (~> 1.1.1)
+- argon2 (= 1.1.3) ** See CHANGELOG.md for version lock reason
 
 Development/Test:
 - rake (~> 10.5)
@@ -39,7 +39,7 @@ Development/Test:
 
 ## Compatibility
 
-Tested with Ruby 2.3.1p112 (2016-04-26 revision 54768) [x86_64-darwin15] against ActiveRecord 5.0.0 on macOS Sierra 10.12.5 (16F73).
+Tested with Ruby 2.4.2p198 (2017-09-14 revision 59899) [x86_64-darwin16] against ActiveRecord 5.2.0.rc1 on macOS High Sierra 10.13.3 (17D47).
 
 Argon2 requires Ruby 2.2 minimum and an OS platform that supports Ruby FFI Bindings, so unfortunately Windows is out.
 

@@ -1,5 +1,8 @@
 # Change Log
 
+##v2.1.1
+- Encountered FFI v1.9.21 build issue on macOS 10.13.3 (High Sierra) so locked Argon at v1.1.3 until this can be resolved. Gem::Ext::BuildError: ERROR: Failed to build gem native extension when installing FFI 1.9.21 with native extensions. See https://github.com/brightcommerce/attr_digest/issues/5 for updates.
+
 ##v2.1.0
 - Removed upper limit for ActiveSupport and ActiveRecord dependencies.
 - Updated README.
