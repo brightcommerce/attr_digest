@@ -19,7 +19,7 @@ Gem::Specification.new do |spec|
 
   spec.add_runtime_dependency('activesupport', '>= 4.2.6')
   spec.add_runtime_dependency('activerecord', '>= 4.2.6')
-  spec.add_runtime_dependency('argon2', '~> 1.1.1')
+  spec.add_runtime_dependency('argon2', '= 1.1.3')
 
   spec.add_development_dependency('rake', '~> 10.5')
   spec.add_development_dependency('rspec', '~> 3.4')
